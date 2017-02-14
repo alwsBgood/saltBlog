@@ -5,10 +5,10 @@ if (localStorage.name && localStorage.email && localStorage.phone)  {
   $('input[type="tel"]').val(localStorage.phone);
 }
 
-(function() {
+$(function() {
   $("[name=send]").click(function (e) {
    var btn = $(this);
-   var $form = $(this).closest('form');
+   var form = $(this).closest('form');
 
    $(":input.error").removeClass('error');
    $(".allert").remove();
@@ -61,45 +61,38 @@ if (localStorage.name && localStorage.email && localStorage.phone)  {
     $(send_btn).each(function() {
       $(this).attr('disabled', true);
     });
-
+    // Отправка на почту
     $.ajax({
       type: 'POST',
-      url: send_adress,
+      url: 'mail.php',
       data: msg,
       success: function() {
-        $('form').trigger("reset");
         setTimeout(function() {
           $("[name=send]").removeAttr("disabled");
         }, 1000);
-        // Настройки модального окна после удачной отправки
+        $('div.md-show').removeClass('md-show');
         dataLayer.push({
           'form_type': formType,
           'event': "form_submit"
         });
-        yaCounter41024484.reachGoal(goal);
+          // Отправка в базу данных
+          $.ajax({
+           type: 'POST',
+           url: 'db/registration.php',
+           dataType: 'json',
+           data: form.serialize(),
+           success: function(response) {
+             console.info(response);
+             console.log(form.serialize());
+             if (response.status == 'success') {
+              $('form').trigger("reset");
+              window.location.href = 'success';
+            }
+          }
+        });
       },
       error: function(xhr, str) {
-        dataLayer.push({
-          'form_type': formType,
-          'event': "form_submit"
-        });
-        yaCounter41024484.reachGoal(goal);
-        $('div.md-show').removeClass('md-show');
-        // Отправка в базу данных
-        $.ajax({
-         type: 'POST',
-         url: 'db/registration.php',
-         dataType: 'json',
-         data: $form.serialize(),
-         success: function(response) {
-           console.info(response);
-           console.log($form.serialize());
-           if (response.status == 'success') {
-            $('form').trigger("reset");
-            window.location.href = 'http://allinsol.com/bootcamp/success/';
-          }
-        }
-      });
+        console.log("Erorr")
       }
     });
 
@@ -107,10 +100,6 @@ if (localStorage.name && localStorage.email && localStorage.phone)  {
   return false;
 })
 });
-
-
-
-
 
  // Smooth scroll to anchor
 
@@ -126,8 +115,6 @@ if (localStorage.name && localStorage.email && localStorage.phone)  {
 jQuery(function($){
  $("input[type='tel']").mask("+9 (999) 999-9999");
 });
-
-
 
 // Scroll BAR
 
@@ -169,20 +156,6 @@ $(function() {
 //   {offset: "550px"}
 //   );
 
-// Parallax
-
-$(window).scroll(function() {
-
-  var st = $(this).scrollTop() /100;
-  var tt = $(this).scrollTop() /100;
-
-  $(".paralax_letter").css({
-    "transform" : "translate3d(0px, " + st  + "%, .0px)",
-    "-webkit-transform" : "translate3d(0px, " + st  + "%, .0px)",
-    "-ms-transform" : "translate3d(0px, " + st  + "%, .0px)"
-  });
-
-});
 
 //  UP BUTTON
 
@@ -205,18 +178,6 @@ $( document ).ready(function() {
     $('body,html').animate({scrollTop:0},1000);
   });
 });
-
-// PREVENT SCROLLING
-
-$('*').click(function() {
-  var modal= $(".md-modal");
-  if( modal.hasClass('md-show')){
-    $("body").addClass('unscroll')
-  } else {
-    $("body").removeClass('unscroll');
-  }
-});
-
 
 // Perfect Pxel
 

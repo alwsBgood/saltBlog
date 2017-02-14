@@ -1,5 +1,17 @@
 @font-face {
-  font-family: "Roboto";
+  font-family: "FuturaDemiC";
   font-style: normal;
   font-weight: normal;
-  src: url("fonts/Roboto.woff2") format("woff2"), url("fonts/Roboto.woff") format("woff"); }
+  src: url("fonts/FuturaDemiC.woff2") format("woff2"), url("fonts/FuturaDemiC.woff") format("woff"); }
+
+@font-face {
+  font-family: "FuturaFuturisC-Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/FuturaFuturisC-Bold.woff2") format("woff2"), url("fonts/FuturaFuturisC-Bold.woff") format("woff"); }
+
+@font-face {
+  font-family: "FuturaFuturisLightC";
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/FuturaFuturisLightC.woff2") format("woff2"), url("fonts/FuturaFuturisLightC.woff") format("woff"); }

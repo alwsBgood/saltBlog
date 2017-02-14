@@ -1,3 +1,5 @@
 @import "bourbon";
 
-@include font-face("Roboto", "fonts/Roboto", $file-formats: woff woff2);
+@include font-face("FuturaDemiC", "fonts/FuturaDemiC", $file-formats: woff woff2);
+@include font-face("FuturaFuturisC-Bold", "fonts/FuturaFuturisC-Bold", $file-formats: woff woff2);
+@include font-face("FuturaFuturisLightC", "fonts/FuturaFuturisLightC", $file-formats: woff woff2);
